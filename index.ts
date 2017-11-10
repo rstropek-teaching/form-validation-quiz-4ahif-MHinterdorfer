@@ -1,67 +1,53 @@
 $(document).ready(function(){
-    //Hide all unnecessary parts
     $(':input[type="submit"]').prop('disabled', true);
     $('#emailMandatory').hide();
     $('#otherMediaChannel').hide();
+    var valid = true;
 
+    $(document).change(function(){
+        var firstName = $('#firstName').val();
+        var lastName = $('#lastName').val();
+        var email = $("#email").val();
+        var newsletterCheck = $('#newsletter').is(':checked');
+        var mediaChannelSelect = $('#mediaChannelSelect').val();
 
-    $('#firstName').change(function(){
-        var textVal = $("#firstName").val();
-        if (textVal === ""){
+        if (firstName === ""){
             $('#firstNameMandatory').show();
+            valid = false;
         }else{
             $('#firstNameMandatory').hide();
+            valid = true;
         }
-        validateForm();
-    });
 
-    $('#lastName').change(function(){
-        var textVal = $("#lastName").val();
-        if (textVal === ""){
+        if (lastName === ""){
             $('#lastNameMandatory').show();
+            valid = false;
         }else{
             $('#lastNameMandatory').hide();
+            valid = true;
         }
-        validateForm();
-    });
 
-    $('#email, #newsletter').change(function(){
-        var email = $("#email").val();
-        var checkbox = $('#newsletter').is(':checked');
-        if (checkbox && email == 0){
+        if (newsletterCheck && email === ''){
             $('#emailMandatory').show();
+            valid = false;
         }else{
             $('#emailMandatory').hide();
         }
-        validateForm();
-    });
 
-    $('#mediaChannelSelect').change(function(){
-        var select = $('#mediaChannelSelect').val();
-        if(select === 'Other'){
+        if(mediaChannelSelect === 'Other'){
             $('#otherMediaChannel').show();
+            if($('#otherMediaChannel').val() === ''){
+                valid = false;
+            } 
         }else{
             $('#otherMediaChannel').hide();
         }
-        validateForm();
+
+        
+        if(valid){
+            $(':input[type="submit"]').prop('disabled', false);
+        }else{
+            $(':input[type="submit"]').prop('disabled', true);
+        }
     });
 });
-
-function validateForm() {
-    var isValid = true;
-    $('.form-control:input[type="text"]').each(function() {
-      if ( $(this).val() === '' ){
-        $(':input[type="submit"]').prop('disabled', true);
-        isValid = false;
-        return false;
-      }
-    });
-    if(isValid) {
-        if($('#newsletter').is(':checked') &&  $("#email").val()!=0){
-            $(':input[type="submit"]').prop('disabled', false);
-        }else if(!$('#newsletter').is(':checked')){
-            $(':input[type="submit"]').prop('disabled', false);
-        }
-    }
-    return isValid;
-  }

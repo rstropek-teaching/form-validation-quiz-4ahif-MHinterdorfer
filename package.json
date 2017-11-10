@@ -6,7 +6,7 @@
   "scripts": {
     "copy-bootstrap": "cpx ./node_modules/bootstrap/dist/css/bootstrap.css dist/ && cpx ./node_modules/bootstrap/dist/js/bootstrap.js dist/",
     "copy-jquery": "cpx ./node_modules/jquery/dist/jquery.js dist/",
-    "build": "cpx *.{html,css} dist/ && npm run copy-bootstrap && npm run copy-jquery",
+    "build": "tsc && cpx *.{html,css,js} dist/ && npm run copy-bootstrap && npm run copy-jquery",
     "start": "browser-sync start -c bs-config.js"
   },
   "author": "Rainer Stropek",
@@ -16,7 +16,17 @@
     "jquery": "^3.2.1"
   },
   "devDependencies": {
+    "@types/jquery": "^3.2.16",
     "browser-sync": "^2.18.13",
-    "cpx": "^1.5.0"
-  }
+    "cpx": "^1.5.0",
+    "typescript": "^2.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rstropek-teaching/form-validation-quiz-4ahif-MHinterdorfer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rstropek-teaching/form-validation-quiz-4ahif-MHinterdorfer/issues"
+  },
+  "homepage": "https://github.com/rstropek-teaching/form-validation-quiz-4ahif-MHinterdorfer#readme"
 }
